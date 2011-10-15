@@ -1,0 +1,14 @@
+{% block form %}
+                <div class="clearfix">
+                    {{ form_label(form[fieldName], field.label) }}
+                    <div class="input">
+                        {{ form_errors(form[fieldName]) }}
+                        {{ form_widget(form[fieldName], { 'attr': {'class': field.class ~ ' ' ~ field.size} }) }}
+                        {% if field.help %}
+                        <span class="help-block">
+                            {{ field.help }}
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+{% endblock %}

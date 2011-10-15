@@ -1,8 +1,6 @@
 {% extends 'ThemeBootstrapBundle::layout.html.twig' %}
 {% block title %}{{ generator.edit.title | trans }} {% endblock %}
 
-{% form_theme edit_form 'CoregenThemeBootstrapBundle:Coregen:_fields.html.twig' %}
-
 {% block content %}
 
     <div class="page-header">
@@ -13,12 +11,14 @@
         </h1>
     </div>
 
-    <form action="{{ path(generator.route ~ '_update', { 'id': record.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form action="{{ path(generator.route ~ '_update', { 'id': record.id }) }}" method="post" {{ form_enctype(form) }}>
 
         {% for fieldName, field in generator.newDisplayFields %}
-            {{ form_row(edit_form[fieldName]) }}
+            {% block form %}{% endblock %}
+            {% include 'CoregenThemeBootstrapBundle:Coregen:_form.html.twig' %}
         {% endfor %}
-        {{ form_row(edit_form._token) }}
+        {{ form_row(form._token) }}
+
         <div class="actions">
             <button type="submit" class="btn primary">{% trans %}Save{% endtrans %}</button>&nbsp;
             <a href="{{ path(generator.route) }}" class="btn">
