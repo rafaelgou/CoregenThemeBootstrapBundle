@@ -46,9 +46,16 @@
                                 {% endif %}
                             {% endfor %}
                             <td>
-                                <a href="{{ path(generator.route ~ '_show', { 'id': generator.renderField('id', record)}) }}">{% trans %}View{% endtrans %}</a>
-                                <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}">{% trans %}Edit{% endtrans %}</a>
-                                <a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}">{% trans %}Delete{% endtrans %}</a>
+                                <a href="{{ path(generator.route ~ '_show', { 'id': generator.renderField('id', record)}) }}">
+                                    {% trans %}View{% endtrans %}
+                                </a>
+                                <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}">
+                                    {% trans %}Edit{% endtrans %}
+                                </a>
+                                <a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}"
+                                   onclick="javascript:deleteConfirm('{% trans %}Are you sure you want to delete:<br/>{% endtrans %}{{ record }} ', this, 'form[_token]', $('#form__token').val());return false;">
+                                    {% trans %}Delete{% endtrans %}
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -56,6 +63,8 @@
                 </table>
             </div>
 
+            <!-- Hidden form to submit Deletion -->
+            {{ form_widget(delete_form) }}
 
             <div class="row">
 

@@ -15,12 +15,10 @@
 
     <form action="{{ path(generator.route ~ '_create') }}" method="post" {{ form_enctype(new_form) }}>
 
-                {% for fieldName, field in generator.newDisplayFields %}
-                    {{ form_row(new_form[fieldName]) }}
-                {% endfor %}
-{#
-        {{ form_rest(new_form) }}
-#}
+        {% for fieldName, field in generator.newDisplayFields %}
+            {{ form_row(new_form[fieldName]) }}
+        {% endfor %}
+        
         {{ form_row(new_form._token) }}
         <div class="actions">
             <button type="submit" class="btn primary">{% trans %}Save{% endtrans %}</button>&nbsp;
