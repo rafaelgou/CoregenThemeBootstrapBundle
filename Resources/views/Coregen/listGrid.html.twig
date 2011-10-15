@@ -1,11 +1,10 @@
 {% extends 'ThemeBootstrapBundle::layout.html.twig' %}
-
-{% block title %}Grid List - Bootstrap Twiter Theme{% endblock %}
+{% block title %}{{ generator.list.title | trans }} {% endblock %}
 
 {% block content %}
 
     <div class="page-header">
-        <h1>{{ generator.list.title | trans }} <small>or <a href="{{ path(generator.route ~ '_new') }}">add new</a></small></h1>
+        <h1>{{ generator.list.title | trans }} <small>{% trans %}or{% endtrans %} <a href="{{ path(generator.route ~ '_new') }}">{% trans %}add new{% endtrans %}</a></small></h1>
     </div>
 
 {% if pager.count == 0  %}
@@ -26,17 +25,19 @@
                 <table class="zebra-striped" id="sortTableExample">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" id="checkall"/></th>
+                            <th>
+                                <input type="checkbox" id="checkall" onclick="checkAllCheckboxes(this, 'selected_objects' )" />
+                            </th>
                             {% for field in generator.listDisplayFields %}
                             <th>{{ field.label | trans  }}</th>
                             {% endfor %}
-                            <th>Actions</th>
+                            <th>{% trans %}Actions{% endtrans %}</th>
                         </tr>
                    </thead>
                     <tbody>
                         {% for record in pager.getResults %}
                         <tr>
-                            <td><input type="checkbox"/></td>
+                            <td><input type="checkbox" id="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/></td>
                             {% for fieldName, field in generator.listDisplayFields %}
                                 {% if field.date_format is defined %}
                             <td>{{ generator.renderField(fieldName, record) | date(field.date_format) }}</td>
@@ -55,83 +56,21 @@
                 </table>
             </div>
 
+
             <div class="row">
 
-                <div class="span5 columns batch_action">
-                    <form action="" method="post">
-                        Actions
-                        <select name="batchSelect" id="batchSelect" class="small">
-                            <option></option>
-                            <option>Delete</option>
-                        </select>
-                        <button type="submit">go</button>
-                    </form>
-                </div>
+{% block batchActions %}{% endblock %}
+{% include 'CoregenThemeBootstrapBundle:Coregen:_batchActions.html.twig' %}
 
-                <div class="span7 columns last pagination">
-                    <ul>
-                        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li class="next"><a href="#">Next &rarr;</a></li>
-                    </ul>
-                </div>
+{% block paginator %}{% endblock %}
+{% include 'CoregenThemeBootstrapBundle:Coregen:_paginator.html.twig' %}
 
             </div>
 
         </div>
 
-        <!-- Filter -->
-        <div class="span4 columns">
-
-            <form action="" class="form-stacked">
-                <fieldset>
-                    <legend>Filter</legend>
-
-                    <div class="clearfix">
-                        <label for="firstname">First Name</label>
-                        <div class="input">
-                            <input class="medium" id="firstname" name="firstname" type="text" />
-                        </div>
-                    </div><!-- /clearfix -->
-
-                    <div class="clearfix">
-                        <label for="latstname">Last Name</label>
-                        <div class="input">
-                            <input class="medium" id="lastname" name="lastname" type="text" />
-                        </div>
-                    </div><!-- /clearfix -->
-
-                    <div class="clearfix">
-                        <label for="language">Language</label>
-                        <div class="input">
-                            <select name="language" id="language" class="medium">
-                                <option></option>
-                                <option>English</option>
-                                <option>Portugues</option>
-                            </select>
-                        </div>
-                    </div><!-- /clearfix -->
-
-                    <div class="clearfix">
-                        <label for="birthday">Birthday</label>
-                        <div class="input">
-                            from<br/>
-                            <input class="small date" id="birthday_to" name="birthday_to" type="text" /><br/>
-                            to<br/>
-                            <input class="small date" id="birthday_from" name="birthday_from" type="text" />
-                        </div>
-                    </div><!-- /clearfix -->
-
-                </fieldset>
-                <div class="actions">
-                <button type="submit" class="btn primary">Filter</button>&nbsp;<button type="reset" class="btn">Reset</button>
-                </div>
-            </form>
-
+{% block filterForm %}{% endblock %}
+{% include 'CoregenThemeBootstrapBundle:Coregen:_filterForm.html.twig' %}
 
         </div>
 

@@ -1,0 +1,12 @@
+{% block batchActions %}
+                <div class="span5 columns batch_action">
+                    <form action="" method="post">
+                        {% trans %}Actions{% endtrans %}
+                        <select name="batchSelect" id="batchSelect" class="small">
+                            <option></option>
+                            <option>Delete</option>
+                        </select>
+                        <button type="submit">{% trans %}go{% endtrans %}</button>
+                    </form>
+                </div>
+{% endblock %}

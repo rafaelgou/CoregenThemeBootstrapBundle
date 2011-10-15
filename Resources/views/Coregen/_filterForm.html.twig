@@ -1,0 +1,52 @@
+{% block filterForm %}
+
+        <!-- Filter -->
+        <div class="span4 columns">
+
+            <form action="" class="form-stacked">
+                <fieldset>
+                    <legend>{% trans %}Filter{% endtrans %}</legend>
+
+                    <div class="clearfix">
+                        <label for="firstname">First Name</label>
+                        <div class="input">
+                            <input class="medium" id="firstname" name="firstname" type="text" />
+                        </div>
+                    </div><!-- /clearfix -->
+
+                    <div class="clearfix">
+                        <label for="latstname">Last Name</label>
+                        <div class="input">
+                            <input class="medium" id="lastname" name="lastname" type="text" />
+                        </div>
+                    </div><!-- /clearfix -->
+
+                    <div class="clearfix">
+                        <label for="language">Language</label>
+                        <div class="input">
+                            <select name="language" id="language" class="medium">
+                                <option></option>
+                                <option>English</option>
+                                <option>Portugues</option>
+                            </select>
+                        </div>
+                    </div><!-- /clearfix -->
+
+                    <div class="clearfix">
+                        <label for="birthday">Birthday</label>
+                        <div class="input">
+                            from<br/>
+                            <input class="small date" id="birthday_to" name="birthday_to" type="text" /><br/>
+                            to<br/>
+                            <input class="small date" id="birthday_from" name="birthday_from" type="text" />
+                        </div>
+                    </div><!-- /clearfix -->
+
+                </fieldset>
+                <div class="actions">
+                <button type="submit" class="btn primary">{% trans %}Filter{% endtrans %}</button>&nbsp;<button type="reset" class="btn">{% trans %}Reset{% endtrans %}</button>
+                </div>
+            </form>
+
+
+{% endblock %}
