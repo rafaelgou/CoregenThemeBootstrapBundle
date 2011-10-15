@@ -1,0 +1,43 @@
+{% extends 'ThemeBootstrapBundle::layout.html.twig' %}
+{% block title %}{{ generator.show.title | trans }} {% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ generator.show.title | trans }}
+            <small>
+                {% trans %}you can{% endtrans %}
+                <a href="{{ path(generator.route) }}">{% trans %}go back to list{% endtrans %}</a>
+                {% trans %}or{% endtrans %}
+                <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}">{% trans %}edit{% endtrans %}</a>
+            </small>
+        </h1>
+    </div>
+
+    <div class="span16 columns">
+
+                {% for fieldName, field in generator.showDisplayFields %}
+                <div class="clearfix">
+                    <label for="xlInput">{{ field.label | trans  }}</label>
+                    <div class="input">
+                        <h4>
+                    {% if field.date_format is defined %}
+                       {{ generator.renderField(fieldName, record) | date(field.date_format) }}
+                    {% else %}
+                        {{ generator.renderField(fieldName, record) }}
+                    {% endif %}
+                        </h4>
+                    </div>
+                </div><!-- /clearfix -->
+                {% endfor %}
+
+                <div class="actions">
+                    <a href="{{ path(generator.route) }}" class="btn">
+                        {% trans %}Back to List{% endtrans %}
+                    </a>
+                    <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}" class="btn">
+                        {% trans %}Edit{% endtrans %}
+                    </a>
+                </div>
+    </div>
+
+{% endblock %}

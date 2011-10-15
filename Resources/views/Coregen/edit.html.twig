@@ -1,0 +1,33 @@
+{% extends 'ThemeBootstrapBundle::layout.html.twig' %}
+{% block title %}{{ generator.edit.title | trans }} {% endblock %}
+
+{% form_theme edit_form 'CoregenThemeBootstrapBundle:Coregen:_fields.html.twig' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1>{{ generator.edit.title | trans }}
+            <small>
+                {% trans %}or{% endtrans %} <a href="{{ path(generator.route) }}">{% trans %}go back to list{% endtrans %}</a>
+            </small>
+        </h1>
+    </div>
+
+    <form action="{{ path(generator.route ~ '_update', { 'id': record.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+                {% for fieldName, field in generator.newDisplayFields %}
+                    {{ form_row(edit_form[fieldName]) }}
+                {% endfor %}
+{#
+        {{ form_rest(edit_form) }}
+#}
+        {{ form_row(edit_form._token) }}
+        <div class="actions">
+            <button type="submit" class="btn primary">{% trans %}Save{% endtrans %}</button>&nbsp;
+            <button type="submit" class="btn primary">{% trans %}Save and Add{% endtrans %}</button>&nbsp;
+            <button type="button" class="btn">{% trans %}Back to List{% endtrans %}</button>
+        </div>
+
+    </form>
+
+{% endblock %}
