@@ -1,4 +1,4 @@
-{% extends 'ThemeBootstrapBundle::layout.html.twig' %}
+{% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
 {% block title %}{{ generator.show.title | trans }} {% endblock %}
 
 {% block content %}
@@ -42,7 +42,7 @@
                         {% trans %}Delete{% endtrans %}
                     </a>
                 </div>
-                
+
                 <!-- Hidden form to submit Deletion -->
                 {{ form_widget(delete_form) }}
 

@@ -1,4 +1,4 @@
-{% extends 'ThemeBootstrapBundle::layout.html.twig' %}
+{% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
 {% block title %}{{ generator.edit.title | trans }} {% endblock %}
 
 {% block content %}
