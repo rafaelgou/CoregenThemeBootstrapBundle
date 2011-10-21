@@ -22,7 +22,9 @@
         <div class="actions">
             <button type="submit" class="btn primary">{% trans %}Save{% endtrans %}</button>&nbsp;
             <button type="submit" class="btn primary">{% trans %}Save and Add{% endtrans %}</button>&nbsp;
-            <button type="button" class="btn">{% trans %}Back to List{% endtrans %}</button>
+            <a href="{{ path(generator.route) }}" class="btn">
+                {% trans %}Back to List{% endtrans %}
+            </a>
         </div>
 
     </form>
