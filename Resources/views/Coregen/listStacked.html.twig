@@ -9,7 +9,19 @@
 {% block content %}
 
     <div class="page-header">
-        <h1>{{ generator.list.title | trans }} <small>{% trans %}or{% endtrans %} <a href="{{ path(generator.route ~ '_new') }}">{% trans %}add new{% endtrans %}</a></small></h1>
+        <h1>
+            {{ generator.list.title | trans }}
+            <small>
+{% if pager.count == 0  %}
+                    ({% trans %}no records{% endtrans %})
+{% elseif   pager.count == 1  %}
+                    ({% trans %}1 record{% endtrans %})
+{% else %}
+                    ({{ pager.count }} {% trans %}records{% endtrans %})
+{% endif %}
+                {% trans %}or{% endtrans %} <a href="{{ path(generator.route ~ '_new') }}">{% trans %}add new{% endtrans %}</a>
+            </small>
+        </h1>
     </div>
 
 {% if pager.count == 0  %}

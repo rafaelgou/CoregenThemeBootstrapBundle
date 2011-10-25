@@ -13,39 +13,37 @@
         </h1>
     </div>
 
-    <div class="span16 columns">
+    <form>
 
-                {% for fieldName, field in generator.showDisplayFields %}
-                <div class="clearfix">
-                    <label for="xlInput">{{ field.label | trans  }}</label>
-                    <div class="input">
-                        <h4>
-                    {% if field.date_format is defined %}
-                       {{ generator.renderField(fieldName, record) | date(field.date_format) }}
-                    {% else %}
-                        {{ generator.renderField(fieldName, record) }}
-                    {% endif %}
-                        </h4>
-                    </div>
-                </div><!-- /clearfix -->
-                {% endfor %}
+        {% for fieldName, field in generator.showDisplayFields %}
+        <div class="clearfix">
+            <label for="xlInput">{{ field.label | trans  }}</label>
+            <div class="input">
+            {% if field.date_format is defined %}
+                <p>{{ generator.renderField(fieldName, record) | date(field.date_format) }}</p>
+            {% else %}
+                <p>{{ generator.renderField(fieldName, record) }}</p>
+            {% endif %}
+            </div>
+        </div><!-- /clearfix -->
+        {% endfor %}
 
-                <div class="actions">
-                    <a href="{{ path(generator.route) }}" class="btn">
-                        {% trans %}Back to List{% endtrans %}
-                    </a>
-                    <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}" class="btn">
-                        {% trans %}Edit{% endtrans %}
-                    </a>
-                    <a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}" class="btn"
-                       onclick="javascript:deleteConfirm('{% trans %}Are you sure you want to delete:<br/>{% endtrans %}{{ record }} ', this, 'form[_token]', $('#form__token').val());return false;">
-                        {% trans %}Delete{% endtrans %}
-                    </a>
-                </div>
+    </form>
 
-                <!-- Hidden form to submit Deletion -->
-                {{ form_widget(delete_form) }}
-
+    <div class="actions">
+        <a href="{{ path(generator.route) }}" class="btn">
+            {% trans %}Back to List{% endtrans %}
+        </a>
+        <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}" class="btn">
+            {% trans %}Edit{% endtrans %}
+        </a>
+        <a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}" class="btn"
+           onclick="javascript:deleteConfirm('{% trans %}Are you sure you want to delete:<br/>{% endtrans %}{{ record }} ', this, 'form[_token]', $('#form__token').val());return false;">
+            {% trans %}Delete{% endtrans %}
+        </a>
     </div>
+
+        <!-- Hidden form to submit Deletion -->
+        {{ form_widget(delete_form) }}
 
 {% endblock %}
