@@ -37,9 +37,11 @@
                 <table class="zebra-striped" id="sortTableExample">
                     <thead>
                         <tr>
+{#
                             <th>
                                 <input type="checkbox" id="checkall" onclick="checkAllCheckboxes(this, 'selected_objects' )" />
                             </th>
+#}
                             {% for field in generator.listDisplayFields %}
                             <th>{{ field.label | trans  }}</th>
                             {% endfor %}
@@ -49,7 +51,11 @@
                     <tbody>
                         {% for record in pager.getResults %}
                         <tr>
-                            <td><input type="checkbox" id="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/></td>
+{#
+                            <td>
+                                <input type="checkbox" id="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/>
+                            </td>
+#}
                             {% for fieldName, field in generator.listDisplayFields %}
                                 {% if field.date_format is defined %}
                             <td>{{ generator.renderField(fieldName, record) | date(field.date_format) }}</td>
@@ -80,8 +86,10 @@
 
             <div class="row">
 
+{#
 {% block batchActions %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_batchActions.html.twig' %}
+#}
 
 {% block paginator %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_paginator.html.twig' %}
@@ -91,8 +99,9 @@
         </div>
 
 {% block filterForm %}{% endblock %}
+{#
 {% include 'CoregenThemeBootstrapBundle:Coregen:_filterForm.html.twig' %}
-
+#}
         </div>
 
     </div>
