@@ -48,10 +48,24 @@
                 {% for record in pager.getResults %}
                 <div class="stacked_list has_details">
                     <ul class="stacked_list_menu details_fixed">
-                        <li><a href="{{ path(generator.route ~ '_show', { 'id': generator.renderField('id', record)}) }}">{% trans %}View{% endtrans %}</a></li>
-                        <li><a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}">{% trans %}Edit{% endtrans %}</a></li>
-                        <li><a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}">{% trans %}Delete{% endtrans %}</a></li>
+                        <li>
+                            <a href="{{ path(generator.route ~ '_show', { 'id': generator.renderField('id', record)}) }}">
+                                {% trans %}View{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}">
+                                {% trans %}Edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}"
+                               onclick="javascript:deleteConfirm('{% trans %}Are you sure you want to delete{% endtrans %}:<br/>{{ record }} ', this, 'form[_token]', $('#form__token').val());return false;">
+                                {% trans %}Delete{% endtrans %}
+                            </a>
+                        </li>
                     </ul>
+
                     <input type="checkbox" id="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/>
                     {% block stacked %}{{ generator.list.stackedTemplate }}{% endblock %}
                     {{ _self.renderStacked(record, generator.list.stackedTemplate) }}

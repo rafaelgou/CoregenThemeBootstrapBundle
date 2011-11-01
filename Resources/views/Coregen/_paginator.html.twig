@@ -9,7 +9,7 @@
                         <li class="prev disabled" title="{% trans %}Previous Page{% endtrans %}"><a href="#">&larr;</a></li>
     {% else %}
                         <li class="prev" title="{% trans %}First Page{% endtrans %}"><a href="{{ path(generator.route, {'page': 1}) }}">&lArr;</a></li>
-                        <li class="prev" title="{% trans %}Previous Page{% endtrans %}"><a href="{{ path(generator.route, {'page': pager.previousPage}) }}">&larr;</a></li>
+                        <li class="prev" title="{% trans %}Last Page{% endtrans %}"><a href="{{ path(generator.route, {'page': pager.previousPage}) }}">&larr;</a></li>
     {% endif %}
                         {% for page in pager.rangeToPaginate %}
                         <li class="{% if pager.currentPage == page %}active{% endif %}"><a href="{{ path(generator.route, {'page': page}) }}">{{ page }}</a></li>
