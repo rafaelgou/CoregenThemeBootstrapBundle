@@ -22,7 +22,14 @@
             {% if field.date_format is defined %}
                 <p>{{ generator.renderField(fieldName, record) | date(field.date_format) }}</p>
             {% else %}
-                <p>{{ generator.renderField(fieldName, record) }}</p>
+                {% set data = generator.renderField(fieldName, record) %}
+                {% if field.raw is defined and  field.raw %}
+                    {% set data = data | raw %}
+                {% endif %}
+                {% if field.trans is defined and field.trans%}
+                    {% set data = data | trans %}
+                {% endif %}
+                <p>{{ data }}</p>
             {% endif %}
             </div>
         </div><!-- /clearfix -->
