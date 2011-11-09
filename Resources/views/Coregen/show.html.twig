@@ -19,10 +19,10 @@
         <div class="clearfix">
             <label for="xlInput">{{ field.label | trans  }}</label>
             <div class="input">
+            {% set data = generator.renderField(fieldName, record) %}
             {% if field.date_format is defined %}
-                <p>{{ generator.renderField(fieldName, record) | date(field.date_format) }}</p>
+                <p>{{ data | date(field.date_format) }}</p>
             {% else %}
-                {% set data = generator.renderField(fieldName, record) %}
                 {% if field.raw is defined and  field.raw %}
                     {% set data = data | raw %}
                 {% endif %}
