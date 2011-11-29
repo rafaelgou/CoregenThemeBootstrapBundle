@@ -8,10 +8,28 @@
                     <legend>{{ generator.filter.title | trans }}</legend>
                     {% for fieldName, field in generator.filter.fields %}
                     <div class="clearfix">
-                        {{ form_label(filter_form[fieldName], field.label) }}
-                        <div class="input">
-                            {{ form_widget(filter_form[fieldName]) }}
+                        {% if field.type == 'daterange' %}
+                             <label>{{ field.label | trans }}</label>
+                        <div class="input clearfix">
+                            <div style="float:left">
+                                <label>{% trans %}from{% endtrans %}</label>
+                                <div class="input">
+                                     {{ form_widget(filter_form[fieldName ~ '_from']) }}
+                                </div>
+                            </div>
+                            <div style="float:left">
+                                <label>{% trans %}to{% endtrans %}</label>
+                                <div class="input">
+                                     {{ form_widget(filter_form[fieldName ~ '_to']) }}
+                                </div>
+                            </div>
                         </div>
+                        {% else %}
+                            {{ form_label(filter_form[fieldName], field.label) }}
+                        <div class="input">
+                                {{ form_widget(filter_form[fieldName]) }}
+                        </div>
+                        {% endif %}
                     </div>
                     {% endfor %}
                 </fieldset>
