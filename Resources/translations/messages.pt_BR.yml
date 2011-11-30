@@ -36,3 +36,5 @@ The item was deleted successfully.: O item foi salvo com sucesso.
 An error ocurred while deleting the item.: Houve um erro ao excluir o item.
 Filter: Filtrar
 Reset: Limpar
+from: de
+to: até
