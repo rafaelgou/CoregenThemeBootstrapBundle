@@ -68,7 +68,6 @@
 
                                 {% if field.list_partial is defined %}
                                     <td>{% include field.list_partial %}</td>
-
                                 {% elseif field.date_format is defined %}
                                     {% set data = generator.renderField(fieldName, record) %}
                                     {% if data %}
@@ -78,6 +77,13 @@
                                     {% endif %}
                                 {% else %}
                                     {% set data = generator.renderField(fieldName, record) %}
+                                    {% if field.boolean_format is defined %}
+                                        {% if data %}
+                                            {% set data = field.boolean_format[1] %}
+                                        {% else %}
+                                            {% set data = field.boolean_format[0] %}
+                                        {% endif %}
+                                    {% endif %}
                                     {% if field.raw is defined and  field.raw %}
                                         {% set data = data | raw %}
                                     {% endif %}
