@@ -53,7 +53,9 @@
                             {% for field in generator.listDisplayFields %}
                             <th>{{ field.label | trans  }}</th>
                             {% endfor %}
+                            {% if generator.list.batch_actions %}
                             <th>{% trans %}Actions{% endtrans %}</th>
+                            {% endif %}
                         </tr>
                    </thead>
                     <tbody>
@@ -93,18 +95,7 @@
                                     <td>{{ data }}</td>
                                 {% endif %}
                             {% endfor %}
-                            <td>
-                                <a href="{{ path(generator.route ~ '_show', { 'id': generator.renderField('id', record)}) }}">
-                                    {% trans %}View{% endtrans %}
-                                </a>
-                                <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}">
-                                    {% trans %}Edit{% endtrans %}
-                                </a>
-                                <a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}"
-                                   onclick="javascript:deleteConfirm('{% trans %}Are you sure you want to delete{% endtrans %}:<br/>{{ record }} ', this, 'form[_token]', $('#form__token').val());return false;">
-                                    {% trans %}Delete{% endtrans %}
-                                </a>
-                            </td>
+{% include 'CoregenThemeBootstrapBundle:Coregen:_objectActions.html.twig' %}
                         </tr>
                         {% endfor %}
                     </tbody>
