@@ -1,5 +1,5 @@
 {% block form %}
-                <div class="clearfix">
+                <div class="clearfix{% if (form_errors(form[fieldName])) %} error{% endif %}">
                     {{ form_label(form[fieldName], field.label) }}
                     <div class="input">
                         {{ form_errors(form[fieldName]) }}
