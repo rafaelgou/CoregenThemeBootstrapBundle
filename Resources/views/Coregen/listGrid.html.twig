@@ -39,7 +39,7 @@
 {% else %}
     <div class="row">
 
-{% if generator.list.batch_actions %}
+{% if generator.getListBatchActions() %}
         <form action="{{ path(generator.route ~ '_batch_actions') }}" id="batch_actions_fom" method="post">
 {% endif %}
 
@@ -49,27 +49,27 @@
                 <table class="zebra-striped" id="sortTableExample">
                     <thead>
                         <tr>
-{% if generator.list.batch_actions %}
+                        {% if generator.getListBatchActions %}
                             <th>
                                 <input type="checkbox" id="checkall" onclick="checkAllCheckboxes(this, 'selected_objects' )" />
                             </th>
-{% endif %}
-                            {% for field in generator.listDisplayFields %}
+                        {% endif %}
+                        {% for field in generator.listDisplayFields %}
                             <th>{{ field.label | trans  }}</th>
-                                {% endfor %}
-                            {% if generator.list.batch_actions %}
+                        {% endfor %}
+                        {% if generator.list.object_actions %}
                             <th>{% trans %}Actions{% endtrans %}</th>
-                            {% endif %}
+                        {% endif %}
                         </tr>
                    </thead>
                     <tbody>
                         {% for record in pager.getResults %}
                         <tr>
-{% if generator.list.batch_actions %}
+                            {% if generator.getListBatchActions %}
                             <td>
                                 <input type="checkbox" id="selected_objects_{{ generator.renderField('id', record) }}" name="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/>
                             </td>
-{% endif %}
+                            {% endif %}
                             {% for fieldName, field in generator.listDisplayFields %}
 
                                 {% if field.list_partial is defined %}
@@ -120,7 +120,7 @@
 
             <div class="row">
 
-{% if generator.list.batch_actions %}
+{% if generator.getListBatchActions %}
 {% block batchActions %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_batchActions.html.twig' %}
 {% endif %}
@@ -132,7 +132,7 @@
 
         </div>
 
-{% if generator.list.batch_actions %}
+{% if generator.getListBatchActions %}
         </form>
 {% endif %}
 

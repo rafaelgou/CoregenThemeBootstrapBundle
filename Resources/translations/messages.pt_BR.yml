@@ -44,3 +44,4 @@ go: executar
 Method "%s" not found in class "%s".: Método "%s" não encontrado na classe "%s".
 An error ocurred while executing the batch action.: Ocorreu um erro ao executar a ação em lote.
 No itens selected to execute the batch action.: Nenhum item selecionado para executar a ação em lote.
+%s item(s) has been excluded successfully.: %s item(ns) foram excluídos com sucesso.
