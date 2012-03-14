@@ -35,8 +35,12 @@ The item was created successfully.: O item foi criado com sucesso.
 The item was updated successfully.: O item foi atualizado com sucesso.
 An error ocurred while saving the item. Check the informed data.: Um erro ocorreu ao salvar o item. Verifique os dados informados.
 The item was deleted successfully.: O item foi excluído com sucesso.
-An error ocurred while deleting the item.: Houve um erro ao excluir o item.
+An error ocurred while deleting the item.: Ocorreu um erro ao excluir o item.
 Filter: Filtrar
 Reset: Limpar
 from: de
 to: até
+go: executar
+Method "%s" not found in class "%s".: Método "%s" não encontrado na classe "%s".
+An error ocurred while executing the batch action.: Ocorreu um erro ao executar a ação em lote.
+No itens selected to execute the batch action.: Nenhum item selecionado para executar a ação em lote.

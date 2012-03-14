@@ -4,8 +4,10 @@
                         {% trans %}Actions{% endtrans %}
                         <select name="batchSelect" id="batchSelect" class="small">
                             <option></option>
-                            <option>Delete</option>
-                        </select>
+                        {% for name, action in generator.list.batch_actions %}
+                            <option value="{{ name }}">{{ action.label | trans }}</option>
+                        {% endfor %}
+                            </select>
                         <button type="submit">{% trans %}go{% endtrans %}</button>
                     </form>
                 </div>

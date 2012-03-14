@@ -39,17 +39,21 @@
 {% else %}
     <div class="row">
 
+{% if generator.list.batch_actions %}
+        <form action="{{ path(generator.route ~ '_batch_actions') }}" id="batch_actions_fom" method="post">
+{% endif %}
+
         <!-- List -->
         <div class="span12 columns">
             <div>
                 <table class="zebra-striped" id="sortTableExample">
                     <thead>
                         <tr>
-{#
+{% if generator.list.batch_actions %}
                             <th>
                                 <input type="checkbox" id="checkall" onclick="checkAllCheckboxes(this, 'selected_objects' )" />
                             </th>
-#}
+{% endif %}
                             {% for field in generator.listDisplayFields %}
                             <th>{{ field.label | trans  }}</th>
                                 {% endfor %}
@@ -61,11 +65,11 @@
                     <tbody>
                         {% for record in pager.getResults %}
                         <tr>
-{#
+{% if generator.list.batch_actions %}
                             <td>
-                                <input type="checkbox" id="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/>
+                                <input type="checkbox" id="selected_objects_{{ generator.renderField('id', record) }}" name="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/>
                             </td>
-#}
+{% endif %}
                             {% for fieldName, field in generator.listDisplayFields %}
 
                                 {% if field.list_partial is defined %}
@@ -116,10 +120,10 @@
 
             <div class="row">
 
-{#
+{% if generator.list.batch_actions %}
 {% block batchActions %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_batchActions.html.twig' %}
-#}
+{% endif %}
 
 {% block paginator %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_paginator.html.twig' %}
@@ -127,6 +131,11 @@
             </div>
 
         </div>
+
+{% if generator.list.batch_actions %}
+        </form>
+{% endif %}
+
 
 {% if filter_form %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_filterForm.html.twig' %}
