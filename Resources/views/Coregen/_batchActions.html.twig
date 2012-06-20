@@ -1,5 +1,5 @@
 {% block batchActions %}
-                <div class="span5 columns batch_action">
+                <div class="span4 columns batch_action">
                     <form action="" method="post">
                         {% trans %}Actions{% endtrans %}
                         <select name="batchSelect" id="batchSelect" class="small">
@@ -8,7 +8,7 @@
                             <option value="{{ name }}">{{ action.label | trans }}</option>
                         {% endfor %}
                             </select>
-                        <button type="submit">{% trans %}go{% endtrans %}</button>
+                        <button class="btn" type="submit">{% trans %}go{% endtrans %}</button>
                     </form>
                 </div>
 {% endblock %}

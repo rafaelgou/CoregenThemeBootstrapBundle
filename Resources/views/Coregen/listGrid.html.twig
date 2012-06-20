@@ -24,11 +24,9 @@
     <div class="row">
 
         <div class="span12 columns">
-            <div id="no_records" class="alert-message warning">
+            <div id="no_records" class="alert span11">
                 <p>
                     {% trans %}No records found. You can filter again or{% endtrans %}
-                </p>
-                <p>
                     <a href="{{ path(generator.route ~ '_new') }}"><button type="submit" class="btn primary">{% trans %}Add New{% endtrans %}</button></a>
                 </p>
             </div>
@@ -42,13 +40,13 @@
     <div class="row">
 
 {% if generator.getListBatchActions() %}
-        <form action="{{ path(generator.route ~ '_batch_actions') }}" id="batch_actions_fom" method="post">
+        <form action="{{ path(generator.route ~ '_batch_actions') }}" id="batch_actions_fom" method="post" class="form-inline">
 {% endif %}
 
         <!-- List -->
-        <div class="span12 columns">
+        <div class="span8 columns">
             <div>
-                <table class="zebra-striped" id="sortTableExample">
+                <table class="table table-bordered table-striped" id="sortTableExample">
                     <thead>
                         <tr>
                         {% if generator.getListBatchActions %}
@@ -120,8 +118,6 @@
             <!-- Hidden form to submit Deletion -->
             {{ form_widget(delete_form) }}
 
-            <div class="row">
-
 {% if generator.getListBatchActions %}
 {% block batchActions %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_batchActions.html.twig' %}
@@ -129,8 +125,6 @@
 
 {% block paginator %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_paginator.html.twig' %}
-
-            </div>
 
         </div>
 

@@ -13,37 +13,37 @@
         </h1>
     </div>
 
-    <form>
-
-        {% for fieldName, field in generator.showDisplayFields %}
-        <div class="clearfix">
-            <label for="xlInput">{{ field.label | trans  }}</label>
-            <div class="input">
-            {% set data = generator.renderField(fieldName, record) %}
-            {% if field.collection is defined and  field.collection %}
-                <ul>
-                {% for item in data %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-                </ul>
-            {% elseif field.date_format is defined %}
-                <p>{{ data | date(field.date_format) }}</p>
-            {% else %}
-                {% if field.raw is defined and  field.raw %}
-                    {% set data = data | raw %}
+    <form class="form-horizontal">
+        <fieldset>
+            {% for fieldName, field in generator.showDisplayFields %}
+            <div class="control-group">
+                <label class="control-label" for="xlInput">{{ field.label | trans  }}</label>
+                <div class="controls" style="font-weight: bold;">
+                {% set data = generator.renderField(fieldName, record) %}
+                {% if field.collection is defined and  field.collection %}
+                    <ul>
+                    {% for item in data %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                    </ul>
+                {% elseif field.date_format is defined %}
+                    <p>{{ data | date(field.date_format) }}</p>
+                {% else %}
+                    {% if field.raw is defined and  field.raw %}
+                        {% set data = data | raw %}
+                    {% endif %}
+                    {% if field.trans is defined and field.trans%}
+                        {% set data = data | trans %}
+                    {% endif %}
+                    <p>{{ data }}</p>
                 {% endif %}
-                {% if field.trans is defined and field.trans%}
-                    {% set data = data | trans %}
-                {% endif %}
-                <p>{{ data }}</p>
-            {% endif %}
-            </div>
-        </div><!-- /clearfix -->
-        {% endfor %}
-
+                </div>
+            </div><!-- /clearfix -->
+            {% endfor %}
+        </fieldset>
     </form>
 
-    <div class="actions">
+    <div class="form-actions">
         <a href="{{ path(generator.route) }}" class="btn">
             {% trans %}Back to List{% endtrans %}
         </a>

@@ -11,15 +11,16 @@
         </h1>
     </div>
 
-    <form action="{{ path(generator.route ~ '_update', { 'id': record.id }) }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path(generator.route ~ '_update', { 'id': record.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+        <fieldset>
+            {% for fieldName, field in generator.editDisplayFields %}
+                {% block form %}{% endblock %}
+                {% include 'CoregenThemeBootstrapBundle:Coregen:_form.html.twig' %}
+            {% endfor %}
+            {{ form_row(form._token) }}
+        </fieldset>
 
-        {% for fieldName, field in generator.editDisplayFields %}
-            {% block form %}{% endblock %}
-            {% include 'CoregenThemeBootstrapBundle:Coregen:_form.html.twig' %}
-        {% endfor %}
-        {{ form_row(form._token) }}
-
-        <div class="actions">
+        <div class="form-actions">
             <button type="submit" class="btn primary" name="form_save" value="true">{% trans %}Save{% endtrans %}</button>&nbsp;
             <a href="{{ path(generator.route) }}" class="btn">
                 {% trans %}Back to List{% endtrans %}

@@ -1,3 +1,0 @@
-CoregenThemeBootstrapBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: CoregenThemeBootstrapBundle:Default:index }
