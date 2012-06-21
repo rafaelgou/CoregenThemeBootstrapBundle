@@ -5,7 +5,7 @@
                         <select name="batchSelect" id="batchSelect" class="small">
                             <option></option>
                         {% for name, action in generator.getListBatchActions %}
-                            <option value="{{ name }}">{{ action.label | trans }}</option>
+                            <option value="{{ name }}">{{ action.label | trans({}, generator.transDomain) }}</option>
                         {% endfor %}
                             </select>
                         <button class="btn" type="submit">{% trans %}go{% endtrans %}</button>

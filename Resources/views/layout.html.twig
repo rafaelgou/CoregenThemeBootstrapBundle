@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>{% block title %}{% endblock %}Your Demo App</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+{% include 'ThemeBootstrapBundle::_assets_full.html.twig' %}
+        
+{% block add_stylesheet %}{% endblock %}
+{% block add_javascript %}{% endblock %}
+
+    </head>
+
+  <body>
+
+    <div id="loading" style="display:none">Loading...</div>
+
+{% include 'CoregenThemeBootstrapBundle::_nav.html.twig' %}
+
+    <div id="main_container" class="container{% if fluid is defined %}-fluid{% endif %}">
+
+        <header>
+{% include 'ThemeBootstrapBundle::_flashes.html.twig' %}
+        </header>
+
+{% block content %}{% endblock %}
+
+{% include "ThemeBootstrapBundle::_footer.html.twig" %}
+
+    </div>
+
+    <div id="dialog_form"></div>
+
+  </body>
+</html>

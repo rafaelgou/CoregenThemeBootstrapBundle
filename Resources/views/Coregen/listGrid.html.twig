@@ -1,11 +1,11 @@
 {% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
-{% block title %}{{ generator.list.title | trans }} {% endblock %}
+{% block title %}{{ generator.list.title | trans({}, generator.transDomain) }} {% endblock %}
 
 {% block content %}
 
     <div class="page-header">
         <h1>
-            {{ generator.list.title | trans }}
+            {{ generator.list.title | trans({}, generator.transDomain) }}
             <small>
 {% if pager.count == 0  %}
                     ({% trans %}no records{% endtrans %})
@@ -19,12 +19,12 @@
         </h1>
     </div>
 
-{% if pager.count == 0  %}
-
     <div class="row">
 
-        <div class="span12 columns">
-            <div id="no_records" class="alert span11">
+{% if pager.count == 0  %}
+
+        <div class="span8 columns">
+            <div id="no_records" class="alert span7">
                 <p>
                     {% trans %}No records found. You can filter again or{% endtrans %}
                     <a href="{{ path(generator.route ~ '_new') }}"><button type="submit" class="btn primary">{% trans %}Add New{% endtrans %}</button></a>
@@ -37,7 +37,6 @@
     {% endif %}
 
 {% else %}
-    <div class="row">
 
 {% if generator.getListBatchActions() %}
         <form action="{{ path(generator.route ~ '_batch_actions') }}" id="batch_actions_fom" method="post" class="form-inline">
@@ -55,7 +54,7 @@
                             </th>
                         {% endif %}
                         {% for field in generator.listDisplayFields %}
-                            <th>{{ field.label | trans  }}</th>
+                            <th>{{ field.label | trans({}, generator.transDomain)  }}</th>
                         {% endfor %}
                         {% if generator.list.object_actions %}
                             <th>{% trans %}Actions{% endtrans %}</th>
@@ -103,7 +102,7 @@
                                         {% set data = data | raw %}
                                     {% endif %}
                                     {% if field.trans is defined and field.trans%}
-                                        {% set data = data | trans %}
+                                        {% set data = data | trans({}, generator.transDomain) %}
                                     {% endif %}
                                     <td>{{ data }}</td>
                                 {% endif %}

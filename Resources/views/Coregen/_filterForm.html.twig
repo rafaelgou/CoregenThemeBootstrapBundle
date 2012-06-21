@@ -6,19 +6,12 @@
 
             <form action="{{ path(generator.route) }}" class="form-stacked" method="get">
                 <fieldset>
-                    <legend>{{ generator.filter.title | trans }}</legend>
-
-                    <div class="control-group">
-                        <label class="control-label" for="firstname">First Name</label>
-                        <div class="controls">
-                            <input class="medium" id="firstname" name="firstname" type="text" />
-                        </div>
-                    </div>
+                    <legend>{{ generator.filter.title | trans({}, generator.transDomain) }}</legend>
 
                     {% for fieldName, field in generator.filter.fields %}
                     <div class="control-group">
                         {% if field.type == 'daterange' %}
-                            <label class="control-label">{{ field.label | trans }}</label>
+                            <label class="control-label">{{ field.label | trans({}, generator.transDomain) }}</label>
                             <div class="controls">
                                 <div class="input-prepend" style="float:left;">
                                     {% trans %}de{% endtrans %}<br/>

@@ -1,9 +1,9 @@
 {% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
-{% block title %}{{ generator.show.title | trans }} {% endblock %}
+{% block title %}{{ generator.show.title | trans({}, generator.transDomain) }} {% endblock %}
 
 {% block content %}
     <div class="page-header">
-        <h1>{{ generator.show.title | trans }}
+        <h1>{{ generator.show.title | trans({}, generator.transDomain) }}
             <small>
                 {% trans %}you can{% endtrans %}
                 <a href="{{ path(generator.route) }}">{% trans %}go back to list{% endtrans %}</a>
@@ -17,7 +17,7 @@
         <fieldset>
             {% for fieldName, field in generator.showDisplayFields %}
             <div class="control-group">
-                <label class="control-label" for="xlInput">{{ field.label | trans  }}</label>
+                <label class="control-label" for="xlInput">{{ field.label | trans({}, generator.transDomain)  }}</label>
                 <div class="controls" style="font-weight: bold;">
                 {% set data = generator.renderField(fieldName, record) %}
                 {% if field.collection is defined and  field.collection %}
@@ -33,7 +33,7 @@
                         {% set data = data | raw %}
                     {% endif %}
                     {% if field.trans is defined and field.trans%}
-                        {% set data = data | trans %}
+                        {% set data = data | trans({}, generator.transDomain) %}
                     {% endif %}
                     <p>{{ data }}</p>
                 {% endif %}

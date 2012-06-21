@@ -1,10 +1,10 @@
 {% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
-{% block title %}{{ generator.edit.title | trans }} {% endblock %}
+{% block title %}{{ generator.edit.title | trans({}, generator.transDomain) }} {% endblock %}
 
 {% block content %}
 
     <div class="page-header">
-        <h1>{{ generator.edit.title | trans }}
+        <h1>{{ generator.edit.title | trans({}, generator.transDomain) }}
             <small>
                 {% trans %}or{% endtrans %} <a href="{{ path(generator.route) }}">{% trans %}go back to list{% endtrans %}</a>
             </small>

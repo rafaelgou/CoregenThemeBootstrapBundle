@@ -4,13 +4,13 @@
     {{ stackedTemplate }}
 {% endmacro %}
 
-{% block title %}{{ generator.list.title | trans }} {% endblock %}
+{% block title %}{{ generator.list.title | trans({}, generator.transDomain) }} {% endblock %}
 
 {% block content %}
 
     <div class="page-header">
         <h1>
-            {{ generator.list.title | trans }}
+            {{ generator.list.title | trans({}, generator.transDomain) }}
             <small>
 {% if pager.count == 0  %}
                     ({% trans %}no records{% endtrans %})
