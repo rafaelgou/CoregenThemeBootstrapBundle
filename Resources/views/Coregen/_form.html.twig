@@ -1,7 +1,7 @@
 {% form_theme form 'ThemeBootstrapBundle:Form:form_div_layout.html.twig' %}
 {% block form %}
 <div class="control-group{% if (form_errors(form[fieldName])) %} error{% endif %}">
-    {{ form_label(form[fieldName], field.label) }}
+    {{ form_label(form[fieldName], field.label | trans({}, generator.transDomain)) }}
     <div class="controls">
         {{ form_errors(form[fieldName]) }}
         {{ form_widget(form[fieldName], { 'attr': {'class': field.class ~ ' ' ~ field.size} }) }}

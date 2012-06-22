@@ -13,7 +13,7 @@
         <![endif]-->
 
 {% include 'ThemeBootstrapBundle::_assets_full.html.twig' %}
-        
+
 {% block add_stylesheet %}{% endblock %}
 {% block add_javascript %}{% endblock %}
 
@@ -25,7 +25,7 @@
 
 {% include 'CoregenThemeBootstrapBundle::_nav.html.twig' %}
 
-    <div id="main_container" class="container{% if fluid is defined %}-fluid{% endif %}">
+    <div id="main_container" class="container">
 
         <header>
 {% include 'ThemeBootstrapBundle::_flashes.html.twig' %}
@@ -33,9 +33,10 @@
 
 {% block content %}{% endblock %}
 
-{% include "ThemeBootstrapBundle::_footer.html.twig" %}
 
     </div>
+
+{% include "ThemeBootstrapBundle::_footer.html.twig" %}
 
     <div id="dialog_form"></div>
 

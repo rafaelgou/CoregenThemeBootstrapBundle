@@ -23,7 +23,7 @@
 
 {% if pager.count == 0  %}
 
-        <div class="span8 columns">
+        <div class="span9 columns">
             <div id="no_records" class="alert span7">
                 <p>
                     {% trans %}No records found. You can filter again or{% endtrans %}
@@ -42,9 +42,12 @@
         <form action="{{ path(generator.route ~ '_batch_actions') }}" id="batch_actions_fom" method="post" class="form-inline">
 {% endif %}
 
-        <!-- List -->
-        <div class="span8 columns">
-            <div>
+        <div class="span9">
+
+            <div class="row">
+                <!-- List -->
+                <div class="span9">
+
                 <table class="table table-bordered table-striped" id="sortTableExample">
                     <thead>
                         <tr>
@@ -125,6 +128,8 @@
 {% block paginator %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_paginator.html.twig' %}
 
+
+            </div>
         </div>
 
 {% if generator.getListBatchActions %}

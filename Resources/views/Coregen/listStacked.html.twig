@@ -1,9 +1,5 @@
 {% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
 
-{% macro renderStacked(record, stackedTemplate) %}
-    {{ stackedTemplate }}
-{% endmacro %}
-
 {% block title %}{{ generator.list.title | trans({}, generator.transDomain) }} {% endblock %}
 
 {% block content %}
@@ -24,71 +20,75 @@
         </h1>
     </div>
 
+    <div class="row">
+
 {% if pager.count == 0  %}
 
-    <div class="span12 columns">
-        <div id="no_records" class="alert-message warning">
-            <p>
-                {% trans %}No records found. You can filter again or{% endtrans %}
-            </p>
-            <p>
-                <a href="{{ path(generator.route ~ '_new') }}"><button type="submit" class="btn primary">{% trans %}Add New{% endtrans %}</button></a>
-            </p>
+        <div class="span9 columns">
+            <div id="no_records" class="alert-message warning">
+                <p>
+                    {% trans %}No records found. You can filter again or{% endtrans %}
+                </p>
+                <p>
+                    <a href="{{ path(generator.route ~ '_new') }}"><button type="submit" class="btn primary">{% trans %}Add New{% endtrans %}</button></a>
+                </p>
+            </div>
         </div>
-    </div>
 
     {% if filter_form %}
     {% include 'CoregenThemeBootstrapBundle:Coregen:_filterForm.html.twig' %}
     {% endif %}
 
 {% else %}
-    <div class="row">
 
 {% if generator.getListBatchActions() %}
         <form action="{{ path(generator.route ~ '_batch_actions') }}" id="batch_actions_fom" method="post" class="form-inline">
 {% endif %}
 
-        <!-- List -->
-        <div class="span8 columns">
+        <div class="span9">
+            <div class="row">
+                <!-- List -->
+                <div class="span9">
 
 {% if generator.getListBatchActions() %}
-            <div class="stacked_list_checkbox">
-                <input type="checkbox" id="checkall" onclick="checkAllCheckboxes(this, 'selected_objects' )" />
-                {% trans %}Select All{% endtrans %}
-            </div>
+                    <div class="stacked_list_checkbox">
+                        <input type="checkbox" id="checkall" onclick="checkAllCheckboxes(this, 'selected_objects' )" />
+                        {% trans %}Select All{% endtrans %}
+                    </div>
 {% endif %}
 
-            <div class="stacked_list_container">
+                    <div class="stacked_list_container">
 
-                {% for record in pager.getResults %}
-                <div class="stacked_list has_details">
-                    <input type="checkbox"
-                           id="selected_objects_{{ generator.renderField('id', record) }}"
-                           name="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/>
-                    {% block stacked %}{{ generator.list.stackedTemplate }}{% endblock %}
-                    <ul class="stacked_list_menu details_fixed">
-                        <li>
-                            <a href="{{ path(generator.route ~ '_show', { 'id': generator.renderField('id', record)}) }}">
-                                {% trans %}View{% endtrans %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}">
-                                {% trans %}Edit{% endtrans %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}"
-                               onclick="javascript:deleteConfirm('{% trans %}Are you sure you want to delete{% endtrans %}:<br/>{{ record }} ', this, 'form[_token]', $('#form__token').val());return false;">
-                                {% trans %}Delete{% endtrans %}
-                            </a>
-                        </li>
-                    </ul>
-                    {{ _self.renderStacked(record, generator.list.stackedTemplate) }}
+                        {% for record in pager.getResults %}
+                        <div class="stacked_list has_details">
+                            <input type="checkbox"
+                                   id="selected_objects_{{ generator.renderField('id', record) }}"
+                                   name="selected_objects[{{ generator.renderField('id', record) }}]" value="1"/>
+                            <ul class="stacked_list_menu details_fixed">
+                                <li>
+                                    <a href="{{ path(generator.route ~ '_show', { 'id': generator.renderField('id', record)}) }}">
+                                        {% trans %}View{% endtrans %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path(generator.route ~ '_edit', { 'id': generator.renderField('id', record)}) }}">
+                                        {% trans %}Edit{% endtrans %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path(generator.route ~ '_delete', { 'id': generator.renderField('id', record)}) }}"
+                                       onclick="javascript:deleteConfirm('{% trans %}Are you sure you want to delete{% endtrans %}:<br/>{{ record }} ', this, 'form[_token]', $('#form__token').val());return false;">
+                                        {% trans %}Delete{% endtrans %}
+                                    </a>
+                                </li>
+                            </ul>
+                            {{ generator.listStackedTemplate(record) | raw }}
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
                 </div>
-                {% endfor %}
-
-            </div>
 
 {% block batchActions %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_batchActions.html.twig' %}
@@ -96,6 +96,7 @@
 {% block paginator %}{% endblock %}
 {% include 'CoregenThemeBootstrapBundle:Coregen:_paginator.html.twig' %}
 
+            </div>
         </div>
 
 {% if generator.getListBatchActions %}
