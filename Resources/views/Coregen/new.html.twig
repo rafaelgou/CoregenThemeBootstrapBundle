@@ -14,8 +14,7 @@
     <form action="{{ path(generator.route ~ '_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
 
         <fieldset>
-            {% for fieldName, field in generator.editDisplayFields %}
-                {% block form %}{% endblock %}
+            {% for fieldName, field in generator.newDisplayFields %}
                 {% include 'CoregenThemeBootstrapBundle:Coregen:_form.html.twig' %}
             {% endfor %}
             {{ form_row(form._token) }}
